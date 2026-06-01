@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta name="description" content="Game Persian - پلتفرم حرفه‌ای بازی‌سازی با امکانات پیشرفته، بازی‌های آنلاین و سیستم امتیازدهی">
+<meta name="keywords" content="بازی آنلاین, بازی ایرانی, Game Persian, سرگرمی, بازی رایگان">
+<meta name="author" content="Game Persian Team">
+<link rel="canonical" href="https://gamepersian.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Game Persian | حرفه‌ای نهایی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========== انیمیشن‌های پیشرفته ========== */
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.9); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+        @keyframes slideInUp {
+            0% { opacity: 0; transform: translateY(80px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(80px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.3); }
+            50% { box-shadow: 0 0 35px rgba(168, 85, 247, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(168, 85, 247, 0.3); }
+        }
+        @keyframes borderGlow {
+            0% { border-color: rgba(168, 85, 247, 0.3); }
+            50% { border-color: rgba(168, 85, 247, 1); }
+            100% { border-color: rgba(168, 85, 247, 0.3); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes rotate360 {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blinkCursor {
+            from, to { border-color: transparent; }
+            50% { border-color: #c084fc; }
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes slideInLeft {
+            0% { opacity: 0; transform: translateX(-80px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            background: radial-gradient(circle at 20% 30%, #0a0a12, #010105);
+            color: #f0eaff;
+            font-size: 16px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        body.english-lang {
+            direction: ltr;
+            text-align: left;
+        }
+        body.english-lang .header,
+        body.english-lang .side-menu,
+        body.english-lang .back-home,
+        body.english-lang .container {
+            direction: ltr;
+            text-align: left;
+        }
+        body.english-lang .comment-text,
+        body.english-lang .comment-actions {
+            padding-right: 0;
+            padding-left: 70px;
+        }
+        body.english-lang .reply-section {
+            margin-right: 0;
+            margin-left: 70px;
+            border-right: none;
+            border-left: 2px solid #c084fc;
+        }
+
+        /* اسپلش اسکرین */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1f1035, #020108);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .splash-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .splash-logo {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f0e6ff, #c084fc, #a855f7, #7c3aed);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite, float 3s ease infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 10px;
+            text-align: center;
+        }
+        .splash-logo small {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            display: block;
+        }
+
+        /* پنل ثبت نام / ورود */
+        .register-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .register-box {
+            background: linear-gradient(145deg, #1e1a3a, #0c0920);
+            padding: 30px 20px;
+            border-radius: 50px;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid #a855f7;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
+            animation: slideInUp 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .register-box h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+        .register-box input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            background: #2a2348;
+            border: 2px solid #6b5b9e;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.4s;
+        }
+        .register-box input:focus {
+            border-color: #c084fc;
+            box-shadow: 0 0 20px #a855f7;
+            outline: none;
+            transform: scale(1.01);
+        }
+        .register-box button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(95deg, #9333ea, #6d28d9);
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.4s;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .register-box button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 80%);
+            transform: rotate(25deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+        .register-box button:hover::after {
+            opacity: 1;
+            transform: rotate(25deg) translate(20%, 20%);
+        }
+        .register-box button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(147, 51, 234, 0.5);
+        }
+        .code-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .code-row input {
+            flex: 1;
+        }
+        .code-row button {
+            width: auto;
+            background: #4c3b7a;
+            padding: 0 15px;
+            white-space: nowrap;
+        }
+        .switch-text {
+            color: #c084fc;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 12px;
+        }
+        .switch-text:hover {
+            text-shadow: 0 0 10px #c084fc;
+            transform: scale(1.01);
+        }
+
+        /* منوی اصلی سایت */
+        .main-website {
+            display: none;
+        }
+        .main-website.active {
+            display: block;
+            animation: fadeInScale 0.8s ease;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(12, 8, 28, 0.97);
+            backdrop-filter: blur(20px);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1950;
+            border-bottom: 2px solid rgba(168, 85, 247, 0.5);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+        }
+        .title span::after {
+            content: '|';
+            animation: blinkCursor 0.9s infinite;
+            margin-right: 2px;
+        }
+        .lang-toggle {
+            background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            font-size: 0.8rem;
+        }
+        .lang-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #a855f7;
+        }
+        .stat-box, .timer, .score-box {
+            background: rgba(26, 23, 48, 0.9);
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(192, 132, 252, 0.4);
+            transition: all 0.4s;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .stat-box:hover, .timer:hover {
+            transform: translateY(-2px);
+            border-color: #c084fc;
+            box-shadow: 0 5px 15px rgba(168,85,247,0.3);
+        }
+        .score-box {
+            background: linear-gradient(95deg, #7c3aed, #4c1d95);
+            animation: glowPulse 2s infinite;
+        }
+
+        /* دکمه همبرگر بزرگ - ریسپانسیو */
+        .hamburger {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #8b5cf6, #5b21b6);
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 2100;
+            transition: all 0.4s;
+        }
+        body.english-lang .hamburger {
+            right: auto;
+            left: 12px;
+        }
+        .hamburger:hover {
+            transform: scale(1.05) rotate(90deg);
+            box-shadow: 0 0 25px #a855f7;
+        }
+        .hamburger-line {
+            width: 28px;
+            height: 4px;
+            background: #fff;
+            border-radius: 10px;
+            transition: all 0.4s;
+        }
+
+        /* ساید منو پیشرفته */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100%;
+            background: rgba(8, 4, 22, 0.98);
+            backdrop-filter: blur(35px);
+            z-index: 2000;
+            padding: 100px 20px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 3px solid #a855f7;
+            overflow-y: auto;
+        }
+        body.english-lang .side-menu {
+            right: auto;
+            left: -100%;
+            border-left: none;
+            border-right: 3px solid #a855f7;
+        }
+        body.english-lang .side-menu.open {
+            right: auto;
+            left: 0;
+        }
+        .side-menu a {
+            color: #fff;
+            padding: 14px;
+            background: rgba(147, 51, 234, 0.25);
+            border-radius: 50px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .side-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        .side-menu a:hover::before {
+            left: 100%;
+        }
+        .side-menu a:hover {
+            background: #7c3aed;
+            transform: translateX(-8px);
+            letter-spacing: 1px;
+        }
+        body.english-lang .side-menu a:hover {
+            transform: translateX(8px);
+        }
+        .side-menu.open {
+            right: 0;
+        }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1900;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .menu-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .back-home {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(59, 42, 110, 0.95);
+            border: 2px solid #c084fc;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1300;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+        body.english-lang .back-home {
+            left: auto;
+            right: 20px;
+        }
+        .back-home:hover {
+            background: #7c3aed;
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* صفحات */
+        .page {
+            display: none;
+            animation: fadeInScale 0.5s ease;
+        }
+        .page.active-page {
+            display: block;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 100px 16px 60px;
+        }
+
+        /* بخش اصلی Hero */
+        .hero {
+            background: rgba(147, 51, 234, 0.12);
+            border-radius: 40px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            backdrop-filter: blur(15px);
+            animation: glowPulse 4s infinite;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #c084fc, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: float 3s ease-in-out infinite;
+        }
+        .hero p {
+            font-size: 0.9rem;
+        }
+        .market-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .market-btn {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+        .market-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .myket-btn { background: linear-gradient(135deg, #3b82f6, #1e40af); }
+        .bazaar-btn { background: linear-gradient(135deg, #10b981, #047857); }
+        .googleplay-btn { background: linear-gradient(135deg, #ef4444, #991b1b); }
+        .google-btn, .rubika-btn {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            border: none;
+            margin: 8px;
+            transition: all 0.4s;
+        }
+        .google-btn { background: #4285F4; }
+        .rubika-btn { background: linear-gradient(135deg, #00bcd4, #00838f); }
+
+        /* کارت بازی بزرگ */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        .game-card {
+            background: rgba(26, 23, 46, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 50px;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid #5b4a8c;
+            transition: all 0.5s;
+            position: relative;
+        }
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: #c084fc;
+            box-shadow: 0 25px 40px rgba(168, 85, 247, 0.4);
+            background: rgba(147, 51, 234, 0.3);
+        }
+
+        /* پروفایل فوق پیشرفته */
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #c084fc;
+            transition: all 0.5s;
+            animation: glowPulse 3s infinite;
+        }
+        .profile-avatar:hover {
+            transform: scale(1.03) rotate(2deg);
+            border-color: #f0eaff;
+        }
+        .profile-info-card {
+            background: rgba(26, 23, 48, 0.8);
+            border-radius: 40px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .profile-info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px solid rgba(192, 132, 252, 0.3);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .level-progress {
+            background: #2a2348;
+            border-radius: 40px;
+            height: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .level-progress-fill {
+            background: linear-gradient(90deg, #c084fc, #7c3aed, #a855f7);
+            background-size: 200% auto;
+            animation: gradientShift 2s ease infinite;
+            height: 100%;
+            width: 0%;
+            border-radius: 40px;
+        }
+
+        /* ========== بخش دسته‌بندی ========== */
+        .category-section {
+            margin: 40px 0;
+        }
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .category-btn {
+            padding: 10px 18px;
+            border-radius: 40px;
+            background: rgba(26, 23, 48, 0.8);
+            border: 2px solid #5b4a8c;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+        .category-btn:hover {
+            transform: translateY(-3px);
+            border-color: #c084fc;
+            background: rgba(147, 51, 234, 0.4);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+        }
+        .category-btn.active {
+            background: linear-gradient(95deg, #9333ea, #6d28d9);
+            border-color: #c084fc;
+            animation: glowPulse 1.5s infinite;
+        }
+        .games-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            animation: fadeInScale 0.5s ease;
+        }
+        .category-game-card {
+            background: rgba(26, 23, 46, 0.85);
+            border-radius: 40px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .category-game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+        .category-game-card:hover::before {
+            left: 100%;
+        }
+        .category-game-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            border-color: #c084fc;
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.3);
+        }
+        .category-game-icon {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+        .category-game-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .category-game-desc {
+            font-size: 0.8rem;
+            color: #b0a8d0;
+        }
+
+        /* تیم جامع */
+        .team-member-detailed {
+            background: rgba(147, 51, 234, 0.2);
+            border-radius: 40px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.4s;
+            border-right: 5px solid #c084fc;
+        }
+        body.english-lang .team-member-detailed {
+            border-right: none;
+            border-left: 5px solid #c084fc;
+        }
+        .team-member-detailed:hover {
+            transform: translateX(-8px);
+            background: rgba(147, 51, 234, 0.35);
+        }
+        body.english-lang .team-member-detailed:hover {
+            transform: translateX(8px);
+        }
+        .member-name {
+            font-size: 1.3rem;
+            color: #e9d5ff;
+            margin-bottom: 15px;
+        }
+        .member-desc {
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* نظرات کاربران پیشرفته */
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .comments-stats {
+            background: rgba(147, 51, 234, 0.3);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+        .comment-item {
+            background: rgba(26, 23, 48, 0.7);
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.4s;
+            animation: slideInLeft 0.5s ease;
+        }
+        .comment-item:hover {
+            transform: translateX(-5px);
+            background: rgba(147, 51, 234, 0.3);
+        }
+        body.english-lang .comment-item:hover {
+            transform: translateX(5px);
+        }
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9333ea, #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .comment-name {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #c084fc;
+        }
+        .comment-date {
+            font-size: 0.7rem;
+            color: #888;
+            margin-right: auto;
+        }
+        body.english-lang .comment-date {
+            margin-right: 0;
+            margin-left: auto;
+        }
+        .comment-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 12px 0;
+            padding-right: 0;
+        }
+        .comment-actions {
+            display: flex;
+            gap: 20px;
+            padding-right: 0;
+            flex-wrap: wrap;
+        }
+        .comment-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        .comment-action:hover {
+            color: #c084fc;
+            transform: scale(1.03);
+        }
+        .comment-action.liked {
+            color: #ef4444;
+        }
+        .reply-section {
+            margin-right: 0;
+            margin-top: 15px;
+            padding-right: 15px;
+            border-right: 2px solid #c084fc;
+        }
+        body.english-lang .reply-section {
+            padding-right: 0;
+            padding-left: 15px;
+            border-right: none;
+            border-left: 2px solid #c084fc;
+        }
+        .reply-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 25px;
+            padding: 12px 15px;
+            margin-top: 10px;
+        }
+        .reply-name {
+            color: #c084fc;
+            font-size: 0.8rem;
+        }
+        .reply-text {
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        .reply-form {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .reply-input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 40px;
+            background: #2a2348;
+            border: 1px solid #5b4a8c;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        .reply-submit {
+            padding: 10px 20px;
+            border-radius: 40px;
+            background: #7c3aed;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .add-comment {
+            margin-top: 30px;
+            background: rgba(26, 23, 48, 0.6);
+            border-radius: 40px;
+            padding: 25px;
+        }
+        .add-comment input, .add-comment textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            background: #2a2348;
+            border: 2px solid #5b4a8c;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .add-comment textarea {
+            border-radius: 25px;
+            min-height: 80px;
+            resize: vertical;
+        }
+        .add-comment button {
+            padding: 12px 25px;
+            background: linear-gradient(95deg, #9333ea, #6d28d9);
+            border: none;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .add-comment button:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        /* پشتیبانی پیشرفته */
+        .support-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        .support-faq {
+            background: rgba(26, 23, 48, 0.6);
+            border-radius: 40px;
+            padding: 25px;
+        }
+        .support-faq h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #c084fc;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(192, 132, 252, 0.3);
+            padding-bottom: 12px;
+        }
+        .faq-question {
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            transition: all 0.3s;
+        }
+        .faq-question:hover {
+            color: #c084fc;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            color: #bbb;
+            padding-right: 12px;
+            font-size: 0.85rem;
+        }
+        body.english-lang .faq-answer {
+            padding-right: 0;
+            padding-left: 12px;
+        }
+        .faq-answer.show {
+            max-height: 200px;
+            padding-top: 8px;
+        }
+        .support-ticket {
+            background: rgba(26, 23, 48, 0.6);
+            border-radius: 40px;
+            padding: 25px;
+        }
+        .support-ticket h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #c084fc;
+        }
+        .ticket-form input, .ticket-form select, .ticket-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            background: #2a2348;
+            border: 2px solid #5b4a8c;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .ticket-form textarea {
+            border-radius: 25px;
+            min-height: 80px;
+        }
+        .ticket-submit {
+            background: linear-gradient(95deg, #9333ea, #6d28d9);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .ticket-list {
+            margin-top: 25px;
+        }
+        .ticket-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-right: 3px solid #c084fc;
+        }
+        body.english-lang .ticket-item {
+            border-right: none;
+            border-left: 3px solid #c084fc;
+        }
+        .ticket-status {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 6px;
+        }
+        .status-pending { background: #f59e0b; }
+        .status-answered { background: #10b981; }
+        .status-closed { background: #6b7280; }
+
+        /* جابه‌جایی حساب */
+        .switch-account-panel {
+            background: rgba(26, 23, 48, 0.8);
+            border-radius: 40px;
+            padding: 20px;
+            margin-top: 25px;
+            animation: bounceIn 0.6s ease;
+        }
+        .switch-account-title {
+            font-size: 1.1rem;
+            color: #c084fc;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .saved-accounts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .saved-account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 40px;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .saved-account-item:hover {
+            background: rgba(147, 51, 234, 0.3);
+            transform: translateX(-3px);
+        }
+        body.english-lang .saved-account-item:hover {
+            transform: translateX(3px);
+        }
+        .switch-to-account {
+            padding: 6px 16px;
+            background: #7c3aed;
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .add-account-form {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .add-account-form input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 40px;
+            background: #2a2348;
+            border: 1px solid #5b4a8c;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        .add-account-form button {
+            padding: 10px 18px;
+            background: #7c3aed;
+            border: none;
+            border-radius: 40px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* رتبه بندی */
+        .rank-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(26, 23, 48, 0.6);
+            border-radius: 50px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .rank-number {
+            width: 40px;
+            height: 40px;
+            background: #7c3aed;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* مودال مقررات */
+        .privacy-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.97);
+            backdrop-filter: blur(25px);
+            z-index: 30000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .privacy-modal.active {
+            display: flex;
+        }
+        .privacy-content {
+            background: linear-gradient(145deg, #1e1a3a, #0a0720);
+            padding: 30px 25px;
+            border-radius: 50px;
+            max-width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 2px solid #a855f7;
+        }
+        .privacy-content h2 {
+            font-size: 1.4rem;
+        }
+
+        /* بقیه استایل‌های پایه */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid #2a2350;
+            font-size: 0.8rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .footer-links a {
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+        .footer-links a:hover {
+            color: #c084fc;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            left: 20px;
+            background: linear-gradient(95deg, #7c3aed, #4c1d95);
+            padding: 12px 20px;
+            border-radius: 50px;
+            z-index: 15000;
+            animation: slideInRight 0.4s ease, fadeOut 3s 1.5s forwards;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+        button, .game-card, .side-menu a, .category-btn, .category-game-card {
+            cursor: pointer;
+        }
+        .online-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(26, 23, 48, 0.5);
+            border-radius: 40px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.4; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+        .recovery-panel .recovery-box {
+            background: #1a1738;
+            padding: 30px 25px;
+            border-radius: 50px;
+            max-width: 90%;
+            width: 100%;
+            margin: 20px;
+        }
+        .recovery-panel input, .recovery-panel button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 40px;
+        }
+        .header > div:last-child {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        @media (min-width: 768px) {
+            body {
+                font-size: 18px;
+            }
+            .container {
+                padding: 140px 40px 80px;
+            }
+            .hero h1 {
+                font-size: 4rem;
+            }
+            .support-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .comment-text, .comment-actions {
+                padding-right: 70px;
+            }
+            body.english-lang .comment-text,
+            body.english-lang .comment-actions {
+                padding-right: 0;
+                padding-left: 70px;
+            }
+            .reply-section {
+                margin-right: 70px;
+            }
+            body.english-lang .reply-section {
+                margin-right: 0;
+                margin-left: 70px;
+            }
+            .splash-logo {
+                font-size: 6rem;
+            }
+            .splash-logo small {
+                font-size: 1.8rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            .games-category-grid {
+                grid-template-columns: 1fr;
+            }
+            .market-buttons {
+                gap: 8px;
+            }
+            .market-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .title {
+                font-size: 1rem;
+                white-space: normal;
+            }
+            .stat-box, .timer, .score-box {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+            .hamburger {
+                width: 42px;
+                height: 42px;
+                top: 10px;
+                right: 10px;
+            }
+            body.english-lang .hamburger {
+                right: auto;
+                left: 10px;
+            }
+            .hamburger-line {
+                width: 24px;
+                height: 3px;
+            }
+            .back-home {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+                bottom: 15px;
+                left: 15px;
+            }
+            body.english-lang .back-home {
+                left: auto;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">G<span style="font-size: 2.5rem;">🎮</span>P<br><small id="splashText">Game Persian Ultimate</small></div>
+</div>
+
+<div id="registerPanel" class="register-panel">
+    <div class="register-box">
+        <h2 id="formTitle" style="font-size: 1.5rem;">🎮 ثبت نام پیشرفته</h2>
+        <div id="registerFields">
+            <input type="text" id="regUser" placeholder="نام کاربری">
+            <input type="email" id="regEmail" placeholder="ایمیل">
+            <input type="tel" id="regMobile" placeholder="موبایل (09...)">
+            <input type="password" id="regPass" placeholder="رمز (حداقل 4)">
+            <div class="code-row">
+                <input type="text" id="verifyCode" placeholder="کد تایید" maxlength="6">
+                <button id="sendCodeBtn">📲 دریافت کد</button>
+            </div>
+        </div>
+        <div id="loginFields" style="display:none">
+            <input type="email" id="loginEmail" placeholder="ایمیل">
+            <input type="tel" id="loginMobile" placeholder="موبایل">
+            <input type="password" id="loginPass" placeholder="رمز">
+        </div>
+        <div id="regError" class="reg-error"></div>
+        <div id="codeHint" class="code-hint"></div>
+        <button id="doRegBtn">✔️ ثبت نام حرفه‌ای</button>
+        <button id="doLoginBtn" style="display:none">🔑 ورود به حساب</button>
+        <div><span id="switchModeBtn" class="switch-text">قبلاً ثبت نام کردید؟ وارد شوید</span></div>
+        <div><span id="forgotPassBtn" class="switch-text" style="margin-top: 10px;">🔐 فراموشی رمز عبور</span></div>
+    </div>
+</div>
+
+<div id="recoveryPanel" class="recovery-panel" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:11000;display:none;justify-content:center;align-items:center;">
+    <div class="recovery-box">
+        <h2 id="recoveryTitle">🔐 بازیابی رمز</h2>
+        <input type="email" id="recoveryEmail" placeholder="ایمیل">
+        <input type="tel" id="recoveryMobile" placeholder="موبایل">
+        <div class="code-row"><input type="text" id="recoveryCode" placeholder="کد"><button id="sendRecoveryCodeBtn">دریافت کد</button></div>
+        <input type="password" id="newPassword" placeholder="رمز جدید">
+        <button id="resetPasswordBtn">تغییر رمز</button>
+        <button id="closeRecoveryBtn" style="background:#a13232;margin-top:8px;">بستن</button>
+        <div id="recoveryMsg"></div>
+    </div>
+</div>
+
+<div id="mainSite" class="main-website">
+    <div class="header">
+        <div class="title"><span id="typingTitle"></span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="lang-toggle" id="langToggleBtn">🇬🇧 English</button>
+            <div class="stat-box">👥 <span id="userCount">0</span></div>
+            <div class="timer">⏱️ <span id="timerDisplay">00:00:00</span></div>
+            <div class="score-box">🏆 <span id="scoreDisplay">0</span></div>
+        </div>
+    </div>
+    <div class="hamburger" id="hamburger"><div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="side-menu" id="sideMenu">
+        <a data-page="home" id="menuHome">🏠 صفحه اصلی</a>
+        <a data-page="support" id="menuSupport">🆘 پشتیبانی</a>
+        <a data-page="about" id="menuAbout">📖 درباره ما (تیم)</a>
+        <a data-page="profile" id="menuProfile">👤 پروفایل من</a>
+        <a data-page="comments" id="menuComments">💬 نظرات کاربران</a>
+        <a data-page="users" id="menuUsers">👥 رتبه‌بندی</a>
+        <a data-page="online" id="menuOnline">🟢 آنلاین‌ها</a>
+        <a data-page="categories" id="menuCategories">🎮 دسته‌بندی</a>
+        <a id="logoutBtn" style="background:#a13232;" id="menuLogout">🚪 خروج</a>
+    </div>
+    <button class="back-home" id="backHome">🏠 بازگشت به خانه</button>
+
+    <div class="container">
+        <div id="homePage" class="page active-page">
+            <div class="hero"><h1 id="heroTitle">Game Persian</h1><p id="heroDesc">پلتفرم حرفه‌ای بازی‌سازی | <span id="heroUserCount">0</span> کاربر | <span id="onlineCount">0</span> آنلاین</p>
+            <div class="market-buttons"><button class="market-btn myket-btn" id="myketBtn">📱 مایکت</button><button class="market-btn bazaar-btn" id="bazaarBtn">🛒 بازار</button><button class="market-btn googleplay-btn" id="googleplayBtn">▶️ گوگل پلی</button></div>
+            <button class="google-btn" id="googleHome">🔍 جستجو گوگل</button><button class="rubika-btn" id="rubikaBtn">📱 کانال روبیکا</button></div>
+            <div class="games-grid" id="gamesGrid">
+                <div class="game-card" data-game="backgammon">🎲 تخته نرد حرفه‌ای</div>
+                <div class="game-card" data-game="amongus">👽 آمونگ آس ویژه</div>
+                <div class="game-card" data-game="rubik">🧩 روبیکا سه‌بعدی</div>
+                <div class="game-card" data-game="battle">⚔️ بتل رویال ایران</div>
+                <div class="game-card" data-game="racing">🏎️ مسابقه سرعت 3000</div>
+                <div class="game-card" data-game="shooter">🔫 مبارزه آنلاین تیمی</div>
+            </div>
+            <div class="about-team"><h2 id="achievementsTitle">✨ افتخارات ما</h2><p id="achievementsText">برنده ۵ جایزه بین‌المللی | ۲ سال فعالیت مستمر | بیش از ۱۰ هزار کاربر راضی</p><p id="scoreInfo">⭐ هر ۲ ساعت حضور = ۱۰ امتیاز | هر ۱۰۰ امتیاز = ۱ سطح ارتقا ⭐</p></div>
+        </div>
+        
+        <div id="supportPage" class="page">
+            <div style="background:rgba(18,16,43,0.7);border-radius:40px;padding:30px 20px;">
+                <h2 style="font-size:1.5rem;" id="supportTitle">🆘 پشتیبانی حرفه‌ای</h2>
+                <div class="support-container">
+                    <div class="support-faq">
+                        <h3 id="faqTitle">📌 سوالات متداول</h3>
+                        <div class="faq-item"><div class="faq-question" id="faq1q">❓ نحوه کسب امتیاز؟ <span>▼</span></div><div class="faq-answer" id="faq1a">هر ۲ ساعت حضور در سایت = ۱۰ امتیاز، هر ۱۰۰ امتیاز باعث ارتقا سطح می‌شود.</div></div>
+                        <div class="faq-item"><div class="faq-question" id="faq2q">❓ قوانین حذف حساب؟ <span>▼</span></div><div class="faq-answer" id="faq2a">از بخش پروفایل می‌توانید حساب خود را حذف کنید که تمام داده‌ها پاک می‌شوند.</div></div>
+                        <div class="faq-item"><div class="faq-question" id="faq3q">❓ تماس با ما <span>▼</span></div><div class="faq-answer" id="faq3a">ایمیل: support@gamepersian.ir | تلفن: ۰۲۱-۹۱۰۰۱۲۳۴ (24 ساعته)</div></div>
+                        <div class="faq-item"><div class="faq-question" id="faq4q">❓ نحوه تغییر رمز <span>▼</span></div><div class="faq-answer" id="faq4a">از بخش فراموشی رمز در صفحه ورود استفاده کنید.</div></div>
+                        <div class="faq-item"><div class="faq-question" id="faq5q">❓ بازی‌ها کی اضافه می‌شوند؟ <span>▼</span></div><div class="faq-answer" id="faq5a">بازی‌های جدید هر ماه اضافه می‌شوند، از بخش دسته‌بندی مشاهده کنید.</div></div>
+                    </div>
+                    <div class="support-ticket">
+                        <h3 id="ticketTitle">🎫 ارسال تیکت پشتیبانی</h3>
+                        <div class="ticket-form">
+                            <input type="text" id="ticketSubject" placeholder="موضوع تیکت">
+                            <select id="ticketCategory">
+                                <option value="technical" id="catTechnical">مشکل فنی</option>
+                                <option value="account" id="catAccount">مشکل حساب کاربری</option>
+                                <option value="payment" id="catPayment">مشکل پرداخت</option>
+                                <option value="other" id="catOther">سایر موارد</option>
+                            </select>
+                            <textarea id="ticketMessage" placeholder="توضیحات خود را وارد کنید..."></textarea>
+                            <button class="ticket-submit" id="submitTicketBtn">📨 ارسال تیکت</button>
+                        </div>
+                        <div class="ticket-list" id="ticketListContainer">
+                            <h4 style="margin-top:20px;" id="myTicketsTitle">📋 تیکت‌های من</h4>
+                            <div id="ticketsList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="aboutPage" class="page"><div style="background:rgba(18,16,43,0.7);border-radius:40px;padding:30px 20px;" id="aboutTeamContainer"></div></div>
+        
+        <div id="profilePage" class="page">
+            <div style="background:rgba(18,16,43,0.7);border-radius:40px;padding:30px 20px;text-align:center;">
+                <h2 style="font-size:1.5rem;" id="profileTitle">👤 پروفایل من</h2>
+                <div class="avatar-container"><img id="profileAvatar" class="profile-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%237c3aed'/%3E%3Ctext x='50' y='67' text-anchor='middle' fill='white' font-size='45' dy='.3em'%3E👤%3C/text%3E%3C/svg%3E"></div>
+                <input type="file" id="avatarInput" accept="image/*" style="display:none">
+                <button id="uploadAvatarBtn" class="upload-avatar-btn" style="padding:12px 25px;font-size:0.9rem;border-radius:50px;" id="uploadAvatarText">📸 انتخاب تصویر</button>
+                <div id="profileInfoContainer"></div>
+                <button id="editProfileBtn" style="padding:12px 25px;font-size:0.9rem;margin:15px;" id="editProfileText">✏️ ویرایش</button>
+                <button id="deleteAccountBtn" style="background:#a13232;padding:12px 25px;font-size:0.9rem;" id="deleteAccountText">🗑️ حذف حساب</button>
+                <div id="editProfilePanel" style="display:none;margin-top:25px;"></div>
+                <div id="switchAccountPanel" class="switch-account-panel" style="display:none;">
+                    <div class="switch-account-title" id="switchAccountTitle">🔄 جابه‌جایی حساب</div>
+                    <div id="savedAccountsList" class="saved-accounts"></div>
+                    <div class="add-account-form">
+                        <input type="text" id="switchAccountEmail" placeholder="ایمیل حساب">
+                        <input type="password" id="switchAccountPass" placeholder="رمز عبور">
+                        <button id="addSwitchAccountBtn" style="background:#7c3aed;padding:10px 18px;" id="addAccountBtnText">➕ افزودن</button>
+                    </div>
+                </div>
+                <button id="toggleSwitchAccountBtn" style="background:#4c3b7a;padding:12px 25px;border-radius:50px;margin-top:15px;font-size:0.9rem;" id="manageAccountsText">🔄 مدیریت حساب‌ها</button>
+            </div>
+        </div>
+        
+        <div id="commentsPage" class="page">
+            <div style="background:rgba(18,16,43,0.7);border-radius:40px;padding:30px 20px;">
+                <div class="comments-header">
+                    <h2 style="font-size:1.5rem;" id="commentsTitle">💬 نظرات کاربران</h2>
+                    <div class="comments-stats" id="commentsStats">📊 0 نظر | 0 لایک</div>
+                </div>
+                <div id="commentsList"></div>
+                <div class="add-comment">
+                    <input type="text" id="commentName" placeholder="نام شما">
+                    <textarea id="commentText" placeholder="نظر خود را بنویسید..."></textarea>
+                    <button id="submitComment" id="submitCommentText">✍️ ارسال نظر</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="usersPage" class="page"><div style="background:rgba(18,16,43,0.7);border-radius:40px;padding:30px 20px;"><h2 style="font-size:1.5rem;" id="rankingTitle">🏆 رتبه‌بندی</h2><div id="usersRankList"></div></div></div>
+        <div id="onlinePage" class="page"><div style="background:rgba(18,16,43,0.7);border-radius:40px;padding:30px 20px;"><h2 style="font-size:1.5rem;" id="onlineTitle">🟢 آنلاین‌ها</h2><div id="onlineUsersList"></div></div></div>
+        
+        <div id="categoriesPage" class="page">
+            <div style="background:rgba(18,16,43,0.7);border-radius:40px;padding:30px 20px;">
+                <h2 style="text-align:center;margin-bottom:25px;font-size:1.5rem;" id="categoriesTitle">🎮 دسته‌بندی بازی‌ها</h2>
+                <div class="category-section">
+                    <div class="category-buttons" id="categoryButtons">
+                        <button class="category-btn active" data-cat="all" id="catAll">🔥 همه</button>
+                        <button class="category-btn" data-cat="action" id="catAction">⚔️ اکشن</button>
+                        <button class="category-btn" data-cat="adventure" id="catAdventure">🗺️ ماجراجویی</button>
+                        <button class="category-btn" data-cat="strategy" id="catStrategy">♟️ استراتژی</button>
+                        <button class="category-btn" data-cat="sports" id="catSports">⚽ ورزشی</button>
+                        <button class="category-btn" data-cat="puzzle" id="catPuzzle">🧩 معمایی</button>
+                        <button class="category-btn" data-cat="racing" id="catRacing">🏁 مسابقه‌ای</button>
+                    </div>
+                    <div id="gamesCategoryGrid" class="games-category-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="privacyModal" class="privacy-modal"><div class="privacy-content"><h2 id="privacyModalTitle">📜 مقررات</h2><div id="privacyText"></div><button class="close-privacy" id="closePrivacyBtn" style="margin-top:20px;padding:10px 25px;border-radius:40px;" id="closePrivacyText">بستن</button></div></div>
+    <footer><div class="footer-links"><a id="privacyBtn">📋 مقررات حریم خصوصی</a><a id="footerEmail">📧 support@gamepersian.ir</a><a id="footerPhone">📞 ۰۲۱-۹۱۰۰۱۲۳۴</a></div><div id="copyright">© 2026 Game Persian | تمامی حقوق محفوظ</div></footer>
+</div>
+
+<script>
+(function(){
+    const $=id=>document.getElementById(id);
+    let pendingCode,pendingRecoveryCode,sessionStart,timerInt,isLogin=false;
+    let users=JSON.parse(localStorage.getItem('users'))||[];
+    let comments=JSON.parse(localStorage.getItem('comments'))||[];
+    let activeSessions=JSON.parse(localStorage.getItem('activeSessions'))||{};
+    let tickets=JSON.parse(localStorage.getItem('tickets'))||[];
+    let savedAccounts=JSON.parse(localStorage.getItem('savedAccounts'))||[];
+    let currentLanguage = localStorage.getItem('siteLanguage') || 'fa';
+    
+    const translations = {
+        fa: {
+            langBtn: "🇬🇧 English",
+            splash: "Game Persian Ultimate",
+            formTitle: "🎮 ثبت نام پیشرفته",
+            regUserPlace: "نام کاربری",
+            regEmailPlace: "ایمیل",
+            regMobilePlace: "موبایل (09...)",
+            regPassPlace: "رمز (حداقل 4)",
+            verifyCodePlace: "کد تایید",
+            sendCode: "📲 دریافت کد",
+            doReg: "✔️ ثبت نام حرفه‌ای",
+            doLogin: "🔑 ورود به حساب",
+            switchToLogin: "قبلاً ثبت نام کردید؟ وارد شوید",
+            switchToReg: "ثبت نام جدید؟",
+            forgotPass: "🔐 فراموشی رمز عبور",
+            recoveryTitle: "🔐 بازیابی رمز",
+            recoveryEmailPlace: "ایمیل",
+            recoveryMobilePlace: "موبایل",
+            recoveryCodePlace: "کد",
+            sendRecoveryCode: "دریافت کد",
+            newPasswordPlace: "رمز جدید",
+            resetPassword: "تغییر رمز",
+            close: "بستن",
+            loginEmailPlace: "ایمیل",
+            loginMobilePlace: "موبایل",
+            loginPassPlace: "رمز",
+            menuHome: "🏠 صفحه اصلی",
+            menuSupport: "🆘 پشتیبانی",
+            menuAbout: "📖 درباره ما (تیم)",
+            menuProfile: "👤 پروفایل من",
+            menuComments: "💬 نظرات کاربران",
+            menuUsers: "👥 رتبه‌بندی",
+            menuOnline: "🟢 آنلاین‌ها",
+            menuCategories: "🎮 دسته‌بندی",
+            menuLogout: "🚪 خروج",
+            backHome: "🏠 بازگشت به خانه",
+            heroTitle: "Game Persian",
+            heroDesc: "پلتفرم حرفه‌ای بازی‌سازی | ",
+            myket: "📱 مایکت",
+            bazaar: "🛒 بازار",
+            googleplay: "▶️ گوگل پلی",
+            googleSearch: "🔍 جستجو گوگل",
+            rubika: "📱 کانال روبیکا",
+            achievementsTitle: "✨ افتخارات ما",
+            achievementsText: "برنده ۵ جایزه بین‌المللی | ۲ سال فعالیت مستمر | بیش از ۱۰ هزار کاربر راضی",
+            scoreInfo: "⭐ هر ۲ ساعت حضور = ۱۰ امتیاز | هر ۱۰۰ امتیاز = ۱ سطح ارتقا ⭐",
+            supportTitle: "🆘 پشتیبانی حرفه‌ای",
+            faqTitle: "📌 سوالات متداول",
+            faq1q: "❓ نحوه کسب امتیاز؟",
+            faq1a: "هر ۲ ساعت حضور در سایت = ۱۰ امتیاز، هر ۱۰۰ امتیاز باعث ارتقا سطح می‌شود.",
+            faq2q: "❓ قوانین حذف حساب؟",
+            faq2a: "از بخش پروفایل می‌توانید حساب خود را حذف کنید که تمام داده‌ها پاک می‌شوند.",
+            faq3q: "❓ تماس با ما",
+            faq3a: "ایمیل: support@gamepersian.ir | تلفن: ۰۲۱-۹۱۰۰۱۲۳۴ (24 ساعته)",
+            faq4q: "❓ نحوه تغییر رمز",
+            faq4a: "از بخش فراموشی رمز در صفحه ورود استفاده کنید.",
+            faq5q: "❓ بازی‌ها کی اضافه می‌شوند؟",
+            faq5a: "بازی‌های جدید هر ماه اضافه می‌شوند، از بخش دسته‌بندی مشاهده کنید.",
+            ticketTitle: "🎫 ارسال تیکت پشتیبانی",
+            ticketSubjectPlace: "موضوع تیکت",
+            catTechnical: "مشکل فنی",
+            catAccount: "مشکل حساب کاربری",
+            catPayment: "مشکل پرداخت",
+            catOther: "سایر موارد",
+            ticketMessagePlace: "توضیحات خود را وارد کنید...",
+            submitTicket: "📨 ارسال تیکت",
+            myTicketsTitle: "📋 تیکت‌های من",
+            profileTitle: "👤 پروفایل من",
+            uploadAvatar: "📸 انتخاب تصویر",
+            editProfile: "✏️ ویرایش",
+            deleteAccount: "🗑️ حذف حساب",
+            switchAccountTitle: "🔄 جابه‌جایی حساب",
+            addAccount: "➕ افزودن",
+            manageAccounts: "🔄 مدیریت حساب‌ها",
+            commentsTitle: "💬 نظرات کاربران",
+            commentNamePlace: "نام شما",
+            commentTextPlace: "نظر خود را بنویسید...",
+            submitComment: "✍️ ارسال نظر",
+            rankingTitle: "🏆 رتبه‌بندی",
+            onlineTitle: "🟢 آنلاین‌ها",
+            categoriesTitle: "🎮 دسته‌بندی بازی‌ها",
+            catAll: "🔥 همه",
+            catAction: "⚔️ اکشن",
+            catAdventure: "🗺️ ماجراجویی",
+            catStrategy: "♟️ استراتژی",
+            catSports: "⚽ ورزشی",
+            catPuzzle: "🧩 معمایی",
+            catRacing: "🏁 مسابقه‌ای",
+            privacyModalTitle: "📜 مقررات",
+            closePrivacy: "بستن",
+            privacyBtn: "📋 مقررات حریم خصوصی",
+            copyright: "© 2026 Game Persian | تمامی حقوق محفوظ",
+            toastSoon: "به زودی منتشر می‌شود!"
+        },
+        en: {
+            langBtn: "🇮🇷 فارسی",
+            splash: "Game Persian Ultimate",
+            formTitle: "🎮 Advanced Registration",
+            regUserPlace: "Username",
+            regEmailPlace: "Email",
+            regMobilePlace: "Mobile (09...)",
+            regPassPlace: "Password (min 4)",
+            verifyCodePlace: "Verification Code",
+            sendCode: "📲 Get Code",
+            doReg: "✔️ Professional Register",
+            doLogin: "🔑 Login",
+            switchToLogin: "Already registered? Login",
+            switchToReg: "New user? Register",
+            forgotPass: "🔐 Forgot Password",
+            recoveryTitle: "🔐 Password Recovery",
+            recoveryEmailPlace: "Email",
+            recoveryMobilePlace: "Mobile",
+            recoveryCodePlace: "Code",
+            sendRecoveryCode: "Get Code",
+            newPasswordPlace: "New Password",
+            resetPassword: "Change Password",
+            close: "Close",
+            loginEmailPlace: "Email",
+            loginMobilePlace: "Mobile",
+            loginPassPlace: "Password",
+            menuHome: "🏠 Home",
+            menuSupport: "🆘 Support",
+            menuAbout: "📖 About Us (Team)",
+            menuProfile: "👤 My Profile",
+            menuComments: "💬 Comments",
+            menuUsers: "👥 Ranking",
+            menuOnline: "🟢 Online Users",
+            menuCategories: "🎮 Categories",
+            menuLogout: "🚪 Logout",
+            backHome: "🏠 Back to Home",
+            heroTitle: "Game Persian",
+            heroDesc: "Professional Game Platform | ",
+            myket: "📱 Myket",
+            bazaar: "🛒 Bazaar",
+            googleplay: "▶️ Google Play",
+            googleSearch: "🔍 Google Search",
+            rubika: "📱 Rubika Channel",
+            achievementsTitle: "✨ Our Achievements",
+            achievementsText: "Winner of 5 international awards | 2 years of continuous activity | Over 10,000 satisfied users",
+            scoreInfo: "⭐ Every 2 hours = 10 points | Every 100 points = 1 level upgrade ⭐",
+            supportTitle: "🆘 Professional Support",
+            faqTitle: "📌 FAQ",
+            faq1q: "❓ How to earn points?",
+            faq1a: "Every 2 hours on site = 10 points, every 100 points upgrades your level.",
+            faq2q: "❓ Account deletion rules?",
+            faq2a: "You can delete your account from the profile section, all data will be erased.",
+            faq3q: "❓ Contact us",
+            faq3a: "Email: support@gamepersian.ir | Phone: 021-91001234 (24/7)",
+            faq4q: "❓ How to change password?",
+            faq4a: "Use the forgot password section on the login page.",
+            faq5q: "❓ When are new games added?",
+            faq5a: "New games are added every month, check the categories section.",
+            ticketTitle: "🎫 Submit Support Ticket",
+            ticketSubjectPlace: "Ticket Subject",
+            catTechnical: "Technical Issue",
+            catAccount: "Account Issue",
+            catPayment: "Payment Issue",
+            catOther: "Other",
+            ticketMessagePlace: "Enter your description...",
+            submitTicket: "📨 Submit Ticket",
+            myTicketsTitle: "📋 My Tickets",
+            profileTitle: "👤 My Profile",
+            uploadAvatar: "📸 Choose Image",
+            editProfile: "✏️ Edit",
+            deleteAccount: "🗑️ Delete Account",
+            switchAccountTitle: "🔄 Switch Account",
+            addAccount: "➕ Add",
+            manageAccounts: "🔄 Manage Accounts",
+            commentsTitle: "💬 User Comments",
+            commentNamePlace: "Your Name",
+            commentTextPlace: "Write your comment...",
+            submitComment: "✍️ Submit Comment",
+            rankingTitle: "🏆 Ranking",
+            onlineTitle: "🟢 Online Users",
+            categoriesTitle: "🎮 Game Categories",
+            catAll: "🔥 All",
+            catAction: "⚔️ Action",
+            catAdventure: "🗺️ Adventure",
+            catStrategy: "♟️ Strategy",
+            catSports: "⚽ Sports",
+            catPuzzle: "🧩 Puzzle",
+            catRacing: "🏁 Racing",
+            privacyModalTitle: "📜 Privacy Policy",
+            closePrivacy: "Close",
+            privacyBtn: "📋 Privacy Policy",
+            copyright: "© 2026 Game Persian | All Rights Reserved",
+            toastSoon: "Coming soon!"
+        }
+    };
+    
+    function t(key) {
+        return translations[currentLanguage][key] || key;
+    }
+    
+    function updateAllTexts() {
+        if($('langToggleBtn')) $('langToggleBtn').innerHTML = t('langBtn');
+        if($('splashText')) $('splashText').innerHTML = t('splash');
+        if($('formTitle')) $('formTitle').innerHTML = t('formTitle');
+        if($('regUser')) $('regUser').placeholder = t('regUserPlace');
+        if($('regEmail')) $('regEmail').placeholder = t('regEmailPlace');
+        if($('regMobile')) $('regMobile').placeholder = t('regMobilePlace');
+        if($('regPass')) $('regPass').placeholder = t('regPassPlace');
+        if($('verifyCode')) $('verifyCode').placeholder = t('verifyCodePlace');
+        if($('sendCodeBtn')) $('sendCodeBtn').innerHTML = t('sendCode');
+        if($('doRegBtn')) $('doRegBtn').innerHTML = t('doReg');
+        if($('doLoginBtn')) $('doLoginBtn').innerHTML = t('doLogin');
+        if($('switchModeBtn')) $('switchModeBtn').innerHTML = isLogin ? t('switchToReg') : t('switchToLogin');
+        if($('forgotPassBtn')) $('forgotPassBtn').innerHTML = t('forgotPass');
+        if($('recoveryTitle')) $('recoveryTitle').innerHTML = t('recoveryTitle');
+        if($('recoveryEmail')) $('recoveryEmail').placeholder = t('recoveryEmailPlace');
+        if($('recoveryMobile')) $('recoveryMobile').placeholder = t('recoveryMobilePlace');
+        if($('recoveryCode')) $('recoveryCode').placeholder = t('recoveryCodePlace');
+        if($('sendRecoveryCodeBtn')) $('sendRecoveryCodeBtn').innerHTML = t('sendRecoveryCode');
+        if($('newPassword')) $('newPassword').placeholder = t('newPasswordPlace');
+        if($('resetPasswordBtn')) $('resetPasswordBtn').innerHTML = t('resetPassword');
+        if($('closeRecoveryBtn')) $('closeRecoveryBtn').innerHTML = t('close');
+        if($('loginEmail')) $('loginEmail').placeholder = t('loginEmailPlace');
+        if($('loginMobile')) $('loginMobile').placeholder = t('loginMobilePlace');
+        if($('loginPass')) $('loginPass').placeholder = t('loginPassPlace');
+        if($('menuHome')) $('menuHome').innerHTML = t('menuHome');
+        if($('menuSupport')) $('menuSupport').innerHTML = t('menuSupport');
+        if($('menuAbout')) $('menuAbout').innerHTML = t('menuAbout');
+        if($('menuProfile')) $('menuProfile').innerHTML = t('menuProfile');
+        if($('menuComments')) $('menuComments').innerHTML = t('menuComments');
+        if($('menuUsers')) $('menuUsers').innerHTML = t('menuUsers');
+        if($('menuOnline')) $('menuOnline').innerHTML = t('menuOnline');
+        if($('menuCategories')) $('menuCategories').innerHTML = t('menuCategories');
+        if($('logoutBtn')) $('logoutBtn').innerHTML = t('menuLogout');
+        if($('backHome')) $('backHome').innerHTML = t('backHome');
+        if($('heroTitle')) $('heroTitle').innerHTML = t('heroTitle');
+        if($('heroDesc')) $('heroDesc').innerHTML = t('heroDesc') + `<span id="heroUserCount">${users.length}</span> کاربر | <span id="onlineCount">0</span> آنلاین`;
+        if($('myketBtn')) $('myketBtn').innerHTML = t('myket');
+        if($('bazaarBtn')) $('bazaarBtn').innerHTML = t('bazaar');
+        if($('googleplayBtn')) $('googleplayBtn').innerHTML = t('googleplay');
+        if($('googleHome')) $('googleHome').innerHTML = t('googleSearch');
+        if($('rubikaBtn')) $('rubikaBtn').innerHTML = t('rubika');
+        if($('achievementsTitle')) $('achievementsTitle').innerHTML = t('achievementsTitle');
+        if($('achievementsText')) $('achievementsText').innerHTML = t('achievementsText');
+        if($('scoreInfo')) $('scoreInfo').innerHTML = t('scoreInfo');
+        if($('supportTitle')) $('supportTitle').innerHTML = t('supportTitle');
+        if($('faqTitle')) $('faqTitle').innerHTML = t('faqTitle');
+        if($('faq1q')) $('faq1q').innerHTML = t('faq1q') + ' <span>▼</span>';
+        if($('faq1a')) $('faq1a').innerHTML = t('faq1a');
+        if($('faq2q')) $('faq2q').innerHTML = t('faq2q') + ' <span>▼</span>';
+        if($('faq2a')) $('faq2a').innerHTML = t('faq2a');
+        if($('faq3q')) $('faq3q').innerHTML = t('faq3q') + ' <span>▼</span>';
+        if($('faq3a')) $('faq3a').innerHTML = t('faq3a');
+        if($('faq4q')) $('faq4q').innerHTML = t('faq4q') + ' <span>▼</span>';
+        if($('faq4a')) $('faq4a').innerHTML = t('faq4a');
+        if($('faq5q')) $('faq5q').innerHTML = t('faq5q') + ' <span>▼</span>';
+        if($('faq5a')) $('faq5a').innerHTML = t('faq5a');
+        if($('ticketTitle')) $('ticketTitle').innerHTML = t('ticketTitle');
+        if($('ticketSubject')) $('ticketSubject').placeholder = t('ticketSubjectPlace');
+        if($('catTechnical')) $('catTechnical').innerHTML = t('catTechnical');
+        if($('catAccount')) $('catAccount').innerHTML = t('catAccount');
+        if($('catPayment')) $('catPayment').innerHTML = t('catPayment');
+        if($('catOther')) $('catOther').innerHTML = t('catOther');
+        if($('ticketMessage')) $('ticketMessage').placeholder = t('ticketMessagePlace');
+        if($('submitTicketBtn')) $('submitTicketBtn').innerHTML = t('submitTicket');
+        if($('myTicketsTitle')) $('myTicketsTitle').innerHTML = t('myTicketsTitle');
+        if($('profileTitle')) $('profileTitle').innerHTML = t('profileTitle');
+        if($('uploadAvatarBtn')) $('uploadAvatarBtn').innerHTML = t('uploadAvatar');
+        if($('editProfileBtn')) $('editProfileBtn').innerHTML = t('editProfile');
+        if($('deleteAccountBtn')) $('deleteAccountBtn').innerHTML = t('deleteAccount');
+        if($('switchAccountTitle')) $('switchAccountTitle').innerHTML = t('switchAccountTitle');
+        if($('addSwitchAccountBtn')) $('addSwitchAccountBtn').innerHTML = t('addAccount');
+        if($('toggleSwitchAccountBtn')) $('toggleSwitchAccountBtn').innerHTML = t('manageAccounts');
+        if($('commentsTitle')) $('commentsTitle').innerHTML = t('commentsTitle');
+        if($('commentName')) $('commentName').placeholder = t('commentNamePlace');
+        if($('commentText')) $('commentText').placeholder = t('commentTextPlace');
+        if($('submitComment')) $('submitComment').innerHTML = t('submitComment');
+        if($('rankingTitle')) $('rankingTitle').innerHTML = t('rankingTitle');
+        if($('onlineTitle')) $('onlineTitle').innerHTML = t('onlineTitle');
+        if($('categoriesTitle')) $('categoriesTitle').innerHTML = t('categoriesTitle');
+        if($('catAll')) $('catAll').innerHTML = t('catAll');
+        if($('catAction')) $('catAction').innerHTML = t('catAction');
+        if($('catAdventure')) $('catAdventure').innerHTML = t('catAdventure');
+        if($('catStrategy')) $('catStrategy').innerHTML = t('catStrategy');
+        if($('catSports')) $('catSports').innerHTML = t('catSports');
+        if($('catPuzzle')) $('catPuzzle').innerHTML = t('catPuzzle');
+        if($('catRacing')) $('catRacing').innerHTML = t('catRacing');
+        if($('privacyModalTitle')) $('privacyModalTitle').innerHTML = t('privacyModalTitle');
+        if($('closePrivacyBtn')) $('closePrivacyBtn').innerHTML = t('closePrivacy');
+        if($('privacyBtn')) $('privacyBtn').innerHTML = t('privacyBtn');
+        if($('copyright')) $('copyright').innerHTML = t('copyright');
+        
+        if(currentLanguage === 'en') {
+            document.body.classList.add('english-lang');
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        } else {
+            document.body.classList.remove('english-lang');
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', 'fa');
+        }
+    }
+    
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('siteLanguage', lang);
+        updateAllTexts();
+        renderComments();
+        renderTickets();
+        renderSavedAccounts();
+        updateRanking();
+        updateOnlineCount();
+        if(getCurrent()) showProfileInfo();
+        loadTeam();
+        loadPrivacy();
+    }
+    
+    function toggleLanguage() {
+        setLanguage(currentLanguage === 'fa' ? 'en' : 'fa');
+    }
+    
+    const gamesDatabase = {
+        action: [
+            { name: "Shadow Fighter", icon: "⚔️", desc: "بازی مبارزه‌ای نفس‌گیر" },
+            { name: "Cyber Strike", icon: "🤖", desc: "تیراندازی در دنیای سایبری" },
+            { name: "Ninja Rush", icon: "🥷", desc: "دوی سریع نینجاها" },
+            { name: "Mortal Combat", icon: "👊", desc: "مسابقه مبارزه حرفه‌ای" }
+        ],
+        adventure: [
+            { name: "Lost Kingdom", icon: "🏰", desc: "سفر به پادشاهی گمشده" },
+            { name: "Dragon Quest", icon: "🐉", desc: "شکار اژدهای افسانه‌ای" },
+            { name: "Mystic Forest", icon: "🌳", desc: "کشف اسرار جنگل جادویی" },
+            { name: "Pirate Treasure", icon: "🏴‍☠️", desc: "گنج یابی دزدان دریایی" }
+        ],
+        strategy: [
+            { name: "Empire Wars", icon: "🏛️", desc: "جنگ‌های امپراتوری" },
+            { name: "Chess Master", icon: "♜", desc: "شطرنج حرفه‌ای" },
+            { name: "Tower Defense", icon: "🗼", desc: "دفاع از برج‌ها" },
+            { name: "Age of Conquest", icon: "⚜️", desc: "عصر فتوحات" }
+        ],
+        sports: [
+            { name: "Football Star", icon: "⚽", desc: "ستاره فوتبال" },
+            { name: "Basketball Pro", icon: "🏀", desc: "بسکتبال حرفه‌ای" },
+            { name: "Tennis Ace", icon: "🎾", desc: "تنیس حرفه‌ای" },
+            { name: "Extreme Racing", icon: "🚴", desc: "دوچرخه‌سواری افراطی" }
+        ],
+        puzzle: [
+            { name: "Brain Puzzle", icon: "🧠", desc: "معماهای مغزی" },
+            { name: "Sudoku Master", icon: "🔢", desc: "سودوکو پیشرفته" },
+            { name: "Match 3D", icon: "🎯", desc: "تطابق سه بعدی" },
+            { name: "Escape Room", icon: "🔐", desc: "اتاق فرار" }
+        ],
+        racing: [
+            { name: "Speed King", icon: "🏎️", desc: "پادشاه سرعت" },
+            { name: "Drift Zone", icon: "🔄", desc: "دریف حرفه‌ای" },
+            { name: "Moto GP", icon: "🏍️", desc: "مسابقه موتورسواری" },
+            { name: "F1 Challenge", icon: "🏁", desc: "چالش فرمول یک" }
+        ]
+    };
+    
+    const fullTeamHTML_fa = `
+        <div style="text-align:center;margin-bottom:30px;"><h2 style="font-size:1.8rem;">✨ استودیو Game Persian ✨</h2><p style="font-size:0.95rem;">ما تیمی از برنامه‌نویسان، طراحان و نوآوران خلاق هستیم که با شور و اشتیاق در دنیای دیجیتال فعالیت می‌کنیم.</p></div>
+        <div class="team-member-detailed"><div class="member-name">🚀 عرفان - مهندس نرم‌افزار و پیشگام هوش مصنوعی</div><div class="member-desc">عرفان، مغز متفکر فنی تیم، با دانش عمیق خود در چهار زبان برنامه‌نویسی قدرتمند (C#, GDScript، Python و Java)، توانایی خارق‌العاده‌ای در توسعه نرم‌افزار و بازی دارد.</div></div>
+        <div class="team-member-detailed"><div class="member-name">🎨 فرهام - خالق دنیای بازی و متخصص گرافیک</div><div class="member-desc">فرهام، هنرمند دیجیتال تیم، دنیای بازی‌ها و وب را با کدنویسی به سه زبان اصلی (GDScript، Python و Java) زنده می‌کند.</div></div>
+        <div class="team-member-detailed"><div class="member-name">🔒 آراز - متخصص چند پلتفرمی، امنیت و خلاقیت بصری</div><div class="member-desc">آراز، متخصص همه‌جانبه تیم، با تسلط بر Python، HTML، CSS، GDScript و Flutter، طیف وسیعی از پروژه‌ها را مدیریت می‌کند.</div></div>
+        <div class="team-intro" style="margin-top:25px;background:rgba(0,0,0,0.4);padding:25px;border-radius:40px;font-size:0.9rem;">ما با همکاری یکدیگر، آماده‌ایم تا چالش‌های تکنولوژیکی را به فرصت‌هایی برای نوآوری تبدیل کنیم.</div>
+    `;
+    
+    const fullTeamHTML_en = `
+        <div style="text-align:center;margin-bottom:30px;"><h2 style="font-size:1.8rem;">✨ Game Persian Studio ✨</h2><p style="font-size:0.95rem;">We are a team of programmers, designers, and creative innovators working passionately in the digital world.</p></div>
+        <div class="team-member-detailed"><div class="member-name">🚀 Erfan - Software Engineer & AI Pioneer</div><div class="member-desc">Erfan, the technical mastermind, with deep knowledge in four powerful programming languages (C#, GDScript, Python, Java), has extraordinary ability in software and game development.</div></div>
+        <div class="team-member-detailed"><div class="member-name">🎨 Farham - Game World Creator & Graphics Specialist</div><div class="member-desc">Farham, the digital artist of the team, brings games and web to life with coding in three main languages (GDScript, Python, Java).</div></div>
+        <div class="team-member-detailed"><div class="member-name">🔒 Araz - Multi-platform Specialist, Security & Visual Creativity</div><div class="member-desc">Araz, the versatile expert, mastering Python, HTML, CSS, GDScript, and Flutter, manages a wide range of projects.</div></div>
+        <div class="team-intro" style="margin-top:25px;background:rgba(0,0,0,0.4);padding:25px;border-radius:40px;font-size:0.9rem;">Together, we are ready to turn technological challenges into opportunities for innovation.</div>
+    `;
+    
+    const privacyHTML_fa = `<h3>قوانین کامل حریم خصوصی</h3><p>اطلاعات شخصی در مرورگر شما ذخیره می‌شود و فقط برای عملکرد سایت استفاده می‌گردد.</p><h3>شرایط استفاده</h3><p>هرگونه تقلب در کسب امتیاز ممنوع است و منجر به حذف حساب می‌شود.</p><h3>حفظ حریم خصوصی</h3><p>ما اطلاعات شما را با هیچ شخص ثالثی به اشتراک نمی‌گذاریم.</p><p>تاریخ بروزرسانی: ۱۴۰۴</p>`;
+    const privacyHTML_en = `<h3>Complete Privacy Policy</h3><p>Personal information is stored in your browser and used only for website functionality.</p><h3>Terms of Use</h3><p>Any cheating in earning points is prohibited and will result in account deletion.</p><h3>Privacy Protection</h3><p>We do not share your information with any third party.</p><p>Last Updated: 2025</p>`;
+    
+    function loadTeam(){
+        if($('aboutTeamContainer')) $('aboutTeamContainer').innerHTML = currentLanguage === 'fa' ? fullTeamHTML_fa : fullTeamHTML_en;
+    }
+    function loadPrivacy(){
+        if($('privacyText')) $('privacyText').innerHTML = currentLanguage === 'fa' ? privacyHTML_fa : privacyHTML_en;
+    }
+    function saveUsers(){localStorage.setItem('users',JSON.stringify(users));}
+    function saveComments(){localStorage.setItem('comments',JSON.stringify(comments));}
+    function saveActiveSessions(){localStorage.setItem('activeSessions',JSON.stringify(activeSessions));}
+    function saveTickets(){localStorage.setItem('tickets',JSON.stringify(tickets));}
+    function saveSavedAccounts(){localStorage.setItem('savedAccounts',JSON.stringify(savedAccounts));}
+    function calculateScore(seconds){return Math.floor(seconds/7200)*10;}
+    function calculateLevel(score){return Math.floor(score/100)+1;}
+    function genCode(){return Math.random().toString(36).substring(2,8).toUpperCase();}
+    function escapeHtml(s){if(!s)return '';return s.replace(/[&<>]/g,function(m){return m==='&'?'&amp;':m==='<'?'&lt;':'&gt;';});}
+    
+    function renderGamesByCategory(category){
+        let gamesHTML = '';
+        let gamesToShow = [];
+        if(category === 'all'){
+            for(let cat in gamesDatabase){
+                gamesToShow = gamesToShow.concat(gamesDatabase[cat]);
+            }
+        } else {
+            gamesToShow = gamesDatabase[category] || [];
+        }
+        gamesToShow.forEach(game => {
+            gamesHTML += `
+                <div class="category-game-card" onclick="showToast('🎮 ${game.name} ${t('toastSoon')}')">
+                    <div class="category-game-icon">${game.icon}</div>
+                    <div class="category-game-name">${game.name}</div>
+                    <div class="category-game-desc">${game.desc}</div>
+                </div>
+            `;
+        });
+        if($('gamesCategoryGrid')) $('gamesCategoryGrid').innerHTML = gamesHTML || '<p style="text-align:center;">هیچ بازی در این دسته وجود ندارد.</p>';
+    }
+    
+    function renderComments(){
+        let commentsWithLikes = JSON.parse(localStorage.getItem('commentsWithLikes')) || {};
+        let currentUser = getCurrent();
+        let c = [...comments].reverse().map((comment, idx) => {
+            let originalIdx = comments.length - 1 - idx;
+            let likes = commentsWithLikes[originalIdx]?.likes || 0;
+            let userLiked = commentsWithLikes[originalIdx]?.likedBy?.includes(currentUser?.email) || false;
+            let replies = comment.replies || [];
+            let repliesHTML = replies.map(reply => `
+                <div class="reply-item">
+                    <div class="reply-name">${escapeHtml(reply.name)}:</div>
+                    <div class="reply-text">${escapeHtml(reply.text)}</div>
+                </div>
+            `).join('');
+            let relativeDate = getRelativeDate(comment.date);
+            return `
+                <div class="comment-item" data-comment-idx="${originalIdx}">
+                    <div class="comment-header">
+                        <div class="comment-avatar">${comment.name.charAt(0).toUpperCase()}</div>
+                        <div class="comment-name">${escapeHtml(comment.name)}</div>
+                        <div class="comment-date">${relativeDate}</div>
+                    </div>
+                    <div class="comment-text">${escapeHtml(comment.text)}</div>
+                    <div class="comment-actions">
+                        <div class="comment-action like-action ${userLiked ? 'liked' : ''}" data-idx="${originalIdx}">
+                            ❤️ <span class="like-count">${likes}</span>
+                        </div>
+                        <div class="comment-action reply-action" data-idx="${originalIdx}">
+                            💬 ${currentLanguage === 'fa' ? 'پاسخ' : 'Reply'}
+                        </div>
+                        ${currentUser && (currentUser.username === comment.name || currentUser.email === 'admin@gamepersian.ir') ? `
+                            <div class="comment-action delete-action" data-idx="${originalIdx}">
+                                🗑️ ${currentLanguage === 'fa' ? 'حذف' : 'Delete'}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="reply-section" id="replySection-${originalIdx}" style="display:none;">
+                        ${repliesHTML}
+                        <div class="reply-form">
+                            <input type="text" class="reply-input" id="replyInput-${originalIdx}" placeholder="${currentLanguage === 'fa' ? 'پاسخ خود را بنویسید...' : 'Write your reply...'}">
+                            <button class="reply-submit" data-idx="${originalIdx}">${currentLanguage === 'fa' ? 'ارسال پاسخ' : 'Send Reply'}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        if($('commentsList')) $('commentsList').innerHTML = c || `<div>${currentLanguage === 'fa' ? 'هیچ نظری وجود ندارد. اولین نظر را بنویسید!' : 'No comments yet. Be the first to comment!'}</div>`;
+        
+        let totalLikes = Object.values(commentsWithLikes).reduce((sum, val) => sum + (val.likes || 0), 0);
+        if($('commentsStats')) $('commentsStats').innerHTML = `📊 ${comments.length} ${currentLanguage === 'fa' ? 'نظر' : 'comments'} | ${totalLikes} ${currentLanguage === 'fa' ? 'لایک' : 'likes'}`;
+        
+        document.querySelectorAll('.like-action').forEach(el => {
+            el.onclick = (e) => {
+                e.stopPropagation();
+                let idx = parseInt(el.dataset.idx);
+                let likesData = JSON.parse(localStorage.getItem('commentsWithLikes')) || {};
+                if(!likesData[idx]) likesData[idx] = { likes: 0, likedBy: [] };
+                let current = getCurrent();
+                if(current && likesData[idx].likedBy?.includes(current.email)){
+                    likesData[idx].likes--;
+                    likesData[idx].likedBy = likesData[idx].likedBy.filter(e => e !== current.email);
+                    showToast(currentLanguage === 'fa' ? 'لایک شما برداشته شد' : 'Your like was removed');
+                } else if(current){
+                    likesData[idx].likes++;
+                    if(!likesData[idx].likedBy) likesData[idx].likedBy = [];
+                    likesData[idx].likedBy.push(current.email);
+                    showToast(currentLanguage === 'fa' ? 'نظر را لایک کردید ❤️' : 'You liked the comment ❤️');
+                } else {
+                    showToast(currentLanguage === 'fa' ? 'برای لایک کردن وارد شوید' : 'Please login to like');
+                }
+                localStorage.setItem('commentsWithLikes', JSON.stringify(likesData));
+                renderComments();
+            };
+        });
+        
+        document.querySelectorAll('.reply-action').forEach(el => {
+            el.onclick = (e) => {
+                e.stopPropagation();
+                let idx = parseInt(el.dataset.idx);
+                let section = $(`replySection-${idx}`);
+                if(section) section.style.display = section.style.display === 'none' ? 'block' : 'none';
+            };
+        });
+        
+        document.querySelectorAll('.reply-submit').forEach(btn => {
+            btn.onclick = (e) => {
+                let idx = parseInt(btn.dataset.idx);
+                let input = $(`replyInput-${idx}`);
+                let replyText = input?.value.trim();
+                let current = getCurrent();
+                if(replyText && current){
+                    if(!comments[idx].replies) comments[idx].replies = [];
+                    comments[idx].replies.push({ name: current.username, text: replyText, date: new Date().toISOString() });
+                    saveComments();
+                    renderComments();
+                    showToast(currentLanguage === 'fa' ? 'پاسخ شما ثبت شد' : 'Your reply was sent');
+                } else if(!current){
+                    showToast(currentLanguage === 'fa' ? 'لطفاً وارد شوید' : 'Please login');
+                } else {
+                    showToast(currentLanguage === 'fa' ? 'لطفاً متن پاسخ را وارد کنید' : 'Please enter reply text');
+                }
+            };
+        });
+        
+        document.querySelectorAll('.delete-action').forEach(el => {
+            el.onclick = (e) => {
+                e.stopPropagation();
+                let idx = parseInt(el.dataset.idx);
+                if(confirm(currentLanguage === 'fa' ? 'آیا از حذف این نظر مطمئن هستید؟' : 'Are you sure you want to delete this comment?')){
+                    comments.splice(idx, 1);
+                    saveComments();
+                    renderComments();
+                    showToast(currentLanguage === 'fa' ? 'نظر حذف شد' : 'Comment deleted');
+                }
+            };
+        });
+    }
+    
+    function getRelativeDate(dateStr){
+        if(!dateStr) return currentLanguage === 'fa' ? 'چند لحظه پیش' : 'Just now';
+        let date = new Date(dateStr);
+        let now = new Date();
+        let diff = Math.floor((now - date) / 1000);
+        if(diff < 60) return currentLanguage === 'fa' ? 'چند لحظه پیش' : 'Just now';
+        if(diff < 3600) return currentLanguage === 'fa' ? `${Math.floor(diff/60)} دقیقه پیش` : `${Math.floor(diff/60)} minutes ago`;
+        if(diff < 86400) return currentLanguage === 'fa' ? `${Math.floor(diff/3600)} ساعت پیش` : `${Math.floor(diff/3600)} hours ago`;
+        return currentLanguage === 'fa' ? `${Math.floor(diff/86400)} روز پیش` : `${Math.floor(diff/86400)} days ago`;
+    }
+    
+    function submitComment(name, text){
+        if(name && text){
+            comments.push({ name: name, text: text, date: new Date().toISOString(), replies: [] });
+            saveComments();
+            renderComments();
+            showToast(currentLanguage === 'fa' ? 'نظر شما با موفقیت ثبت شد' : 'Your comment was successfully submitted');
+            return true;
+        }
+        return false;
+    }
+    
+    function renderTickets(){
+        let currentUser = getCurrent();
+        if(!currentUser) return;
+        let userTickets = tickets.filter(t => t.userEmail === currentUser.email);
+        let html = userTickets.map(t => `
+            <div class="ticket-item">
+                <div><strong>${escapeHtml(t.subject)}</strong> - ${t.category === 'technical' ? (currentLanguage === 'fa' ? 'مشکل فنی' : 'Technical Issue') : t.category === 'account' ? (currentLanguage === 'fa' ? 'مشکل حساب' : 'Account Issue') : t.category === 'payment' ? (currentLanguage === 'fa' ? 'مشکل پرداخت' : 'Payment Issue') : (currentLanguage === 'fa' ? 'سایر' : 'Other')}</div>
+                <div style="font-size:0.85rem;margin-top:5px;">${escapeHtml(t.message)}</div>
+                <div><span class="ticket-status status-${t.status}">${t.status === 'pending' ? (currentLanguage === 'fa' ? 'در انتظار پاسخ' : 'Pending') : t.status === 'answered' ? (currentLanguage === 'fa' ? 'پاسخ داده شده' : 'Answered') : (currentLanguage === 'fa' ? 'بسته شده' : 'Closed')}</span></div>
+                <div style="font-size:0.7rem;color:#888;">${new Date(t.date).toLocaleDateString(currentLanguage === 'fa' ? 'fa-IR' : 'en-US')}</div>
+            </div>
+        `).join('');
+        if($('ticketsList')) $('ticketsList').innerHTML = html || (currentLanguage === 'fa' ? '<div>هیچ تیکتی ثبت نکرده‌اید.</div>' : '<div>You haven\'t submitted any tickets.</div>');
+    }
+    
+    function submitTicket(subject, category, message){
+        let current = getCurrent();
+        if(!current){ showToast(currentLanguage === 'fa' ? 'لطفاً وارد شوید' : 'Please login'); return false; }
+        if(subject && message){
+            tickets.push({ userEmail: current.email, subject, category, message, status: 'pending', date: new Date().toISOString() });
+            saveTickets();
+            renderTickets();
+            showToast(currentLanguage === 'fa' ? 'تیکت شما با موفقیت ارسال شد' : 'Your ticket was successfully submitted');
+            return true;
+        }
+        showToast(currentLanguage === 'fa' ? 'لطفاً موضوع و متن تیکت را وارد کنید' : 'Please enter subject and message');
+        return false;
+    }
+    
+    function renderSavedAccounts(){
+        let html = savedAccounts.map(acc => `
+            <div class="saved-account-item">
+                <span>${escapeHtml(acc.email)}</span>
+                <button class="switch-to-account" data-email="${escapeHtml(acc.email)}">🔑 ${currentLanguage === 'fa' ? 'ورود' : 'Login'}</button>
+            </div>
+        `).join('');
+        if($('savedAccountsList')) $('savedAccountsList').innerHTML = html || (currentLanguage === 'fa' ? '<div style="text-align:center;color:#888;">حسابی ذخیره نشده است</div>' : '<div style="text-align:center;color:#888;">No saved accounts</div>');
+        
+        document.querySelectorAll('.switch-to-account').forEach(btn => {
+            btn.onclick = () => {
+                let email = btn.dataset.email;
+                let account = savedAccounts.find(a => a.email === email);
+                if(account){
+                    let user = users.find(u => u.email === account.email && u.password === account.password);
+                    if(user){
+                        saveCurrent(user);
+                        location.reload();
+                    } else {
+                        showToast(currentLanguage === 'fa' ? 'اطلاعات حساب تغییر کرده است' : 'Account information has changed');
+                        savedAccounts = savedAccounts.filter(a => a.email !== email);
+                        saveSavedAccounts();
+                        renderSavedAccounts();
+                    }
+                }
+            };
+        });
+    }
+    
+    function addSavedAccount(email, password){
+        let user = users.find(u => u.email === email && u.password === password);
+        if(user && !savedAccounts.some(a => a.email === email)){
+            savedAccounts.push({ email, password });
+            saveSavedAccounts();
+            renderSavedAccounts();
+            showToast(currentLanguage === 'fa' ? 'حساب با موفقیت ذخیره شد' : 'Account saved successfully');
+            return true;
+        } else if(savedAccounts.some(a => a.email === email)){
+            showToast(currentLanguage === 'fa' ? 'این حساب قبلاً ذخیره شده است' : 'This account is already saved');
+        } else {
+            showToast(currentLanguage === 'fa' ? 'ایمیل یا رمز عبور نادرست است' : 'Incorrect email or password');
+        }
+        return false;
+    }
+    
+    function updateOnlineCount(){
+        let now=Date.now(), online=Object.keys(activeSessions).filter(u=>now-activeSessions[u]<60000);
+        online.forEach(u=>{if(now-activeSessions[u]>=60000)delete activeSessions[u];});
+        saveActiveSessions();
+        let cnt=online.length;
+        if($('onlineCount')) $('onlineCount').innerText=cnt;
+        let onlineText = currentLanguage === 'fa' ? 'هیچ کاربر آنلاینی نیست' : 'No online users';
+        if($('onlineUsersList')) $('onlineUsersList').innerHTML=online.length?online.map(u=>`<div class="online-user"><div class="online-dot"></div>${escapeHtml(u)}</div>`).join('') : `<div>${onlineText}</div>`;
+        return online;
+    }
+    
+    function setUserOnline(username){if(username){activeSessions[username]=Date.now();saveActiveSessions();updateOnlineCount();}}
+    
+    function updateRanking(){
+        let sorted=[...users].sort((a,b)=>(b.totalScore||0)-(a.totalScore||0));
+        if($('usersRankList')) $('usersRankList').innerHTML=sorted.slice(0,30).map((u,i)=>`<div class="rank-item"><div class="rank-number">${i+1}</div><div class="rank-info"><strong>${escapeHtml(u.username)}</strong><div>${currentLanguage === 'fa' ? 'سطح' : 'Level'} ${calculateLevel(u.totalScore||0)}</div></div><div class="rank-score">${u.totalScore||0} ${currentLanguage === 'fa' ? 'امتیاز' : 'points'}</div></div>`).join('');
+    }
+    
+    function updCount(){ if($('userCount')) $('userCount').innerText=users.length; if($('heroUserCount'))$('heroUserCount').innerText=users.length; updateRanking(); updateOnlineCount();}
+    
+    function getCurrent(){let r=localStorage.getItem('currentUser');return r?JSON.parse(r):null;}
+    function saveCurrent(d){localStorage.setItem('currentUser',JSON.stringify(d));}
+    
+    function showProfileInfo(){
+        let u=getCurrent(); if(!u) return;
+        let score=u.totalScore||0, level=calculateLevel(score), progress=(score%100);
+        let container=$('profileInfoContainer'); if(container) container.innerHTML=`
+            <div class="profile-info-card"><div class="profile-info-item"><span>${currentLanguage === 'fa' ? 'نام کاربری' : 'Username'}</span><span>${escapeHtml(u.username)}</span></div>
+            <div class="profile-info-item"><span>${currentLanguage === 'fa' ? 'ایمیل' : 'Email'}</span><span>${escapeHtml(u.email)}</span></div>
+            <div class="profile-info-item"><span>${currentLanguage === 'fa' ? 'موبایل' : 'Mobile'}</span><span>${escapeHtml(u.mobile)}</span></div>
+            <div class="profile-info-item"><span>${currentLanguage === 'fa' ? 'امتیاز' : 'Score'}</span><span style="color:#c084fc;">${score}</span></div>
+            <div class="profile-info-item"><span>${currentLanguage === 'fa' ? 'سطح' : 'Level'}</span><span>${currentLanguage === 'fa' ? 'سطح' : 'Level'} ${level}</span></div></div>
+            <div class="level-progress"><div class="level-progress-fill" style="width:${progress}%"></div></div><div style="font-size:0.85rem;">${progress}/100 ${currentLanguage === 'fa' ? 'تا سطح بعد' : 'to next level'}</div>`;
+        let avatarImg=$('profileAvatar'); if(avatarImg && u.avatar) avatarImg.src=u.avatar;
+    }
+    
+    function startTimer(){
+        sessionStart=parseInt(localStorage.getItem('sessionStart'))||Date.now(); localStorage.setItem('sessionStart',sessionStart);
+        let current=getCurrent(); if(current) setUserOnline(current.username);
+        function tick(){
+            if(!sessionStart)return;
+            let e=Math.floor((Date.now()-sessionStart)/1000);
+            let h=Math.floor(e/3600),m=Math.floor((e%3600)/60),s=e%60;
+            if($('timerDisplay')) $('timerDisplay').innerText=`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            let score=calculateScore(e);
+            if($('scoreDisplay')) $('scoreDisplay').innerText=score;
+            if(current){
+                let idx=users.findIndex(x=>x.email===current.email);
+                if(idx!==-1){ users[idx].totalScore=score; saveUsers(); saveCurrent(users[idx]); showProfileInfo(); updateRanking();}
+            }
+            updateOnlineCount();
+        }
+        if(timerInt)clearInterval(timerInt); tick(); timerInt=setInterval(tick,1000);
+    }
+    
+    function showMain(){ $('registerPanel').style.display='none'; $('mainSite').classList.add('active'); loadTeam(); loadPrivacy(); showProfileInfo(); startTimer(); updCount(); renderComments(); renderTickets(); renderSavedAccounts();}
+    
+    $('switchModeBtn')&&($('switchModeBtn').onclick=()=>{ isLogin=!isLogin; $('formTitle').innerHTML=isLogin?t('doLogin'):t('formTitle'); $('registerFields').style.display=isLogin?'none':'block'; $('loginFields').style.display=isLogin?'block':'none'; $('doRegBtn').style.display=isLogin?'none':'block'; $('doLoginBtn').style.display=isLogin?'block':'none'; $('switchModeBtn').innerHTML=isLogin?t('switchToReg'):t('switchToLogin'); });
+    $('forgotPassBtn')&&($('forgotPassBtn').onclick=()=>{$('recoveryPanel').style.display='flex';});
+    $('closeRecoveryBtn')&&($('closeRecoveryBtn').onclick=()=>{$('recoveryPanel').style.display='none';});
+    $('sendCodeBtn')&&($('sendCodeBtn').onclick=()=>{ let m=$('regMobile').value.trim(); if(!/^09[0-9]{9}$/.test(m)){$('regError').innerText=currentLanguage==='fa'?'موبایل نامعتبر':'Invalid mobile';return;} pendingCode=genCode(); $('codeHint').innerHTML=`${currentLanguage==='fa'?'کد: ':'Code: '}${pendingCode}`; });
+    $('doRegBtn')&&($('doRegBtn').onclick=()=>{ let u=$('regUser').value.trim(),e=$('regEmail').value.trim(),m=$('regMobile').value.trim(),p=$('regPass').value.trim(),c=$('verifyCode').value.trim().toUpperCase(); if(!u||!e||!m||!p||!c){$('regError').innerText=currentLanguage==='fa'?'تمامی فیلدها الزامی':'All fields required';return;} if(p.length<4){$('regError').innerText=currentLanguage==='fa'?'رمز حداقل 4 کاراکتر':'Password min 4 chars';return;} if(users.some(x=>x.email===e||x.mobile===m)){$('regError').innerText=currentLanguage==='fa'?'ایمیل یا موبایل تکراری':'Email or mobile already exists';return;} if(!pendingCode||c!==pendingCode){$('regError').innerText=currentLanguage==='fa'?'کد نامعتبر':'Invalid code';return;} let newUser={username:u,email:e,mobile:m,password:p,totalScore:0,registerDate:new Date().toLocaleDateString(),avatar:''}; users.push(newUser); saveUsers(); saveCurrent(newUser); showMain(); });
+    $('doLoginBtn')&&($('doLoginBtn').onclick=()=>{ let e=$('loginEmail').value.trim(),m=$('loginMobile').value.trim(),p=$('loginPass').value.trim(); let user=users.find(u=>u.email===e&&u.mobile===m&&u.password===p); if(!user){$('regError').innerText=currentLanguage==='fa'?'اطلاعات نادرست':'Invalid credentials';return;} saveCurrent(user); showMain(); });
+    $('logoutBtn')&&($('logoutBtn').onclick=()=>{ let u=getCurrent(); if(u&&activeSessions[u.username])delete activeSessions[u.username]; saveActiveSessions(); localStorage.removeItem('currentUser'); localStorage.removeItem('sessionStart'); location.reload(); });
+    $('deleteAccountBtn')&&($('deleteAccountBtn').onclick=()=>{ let u=getCurrent(); if(u&&confirm(currentLanguage==='fa'?'حذف کامل حساب؟':'Delete account permanently?')){ users=users.filter(x=>x.email!==u.email); saveUsers(); if(activeSessions[u.username])delete activeSessions[u.username]; saveActiveSessions(); localStorage.removeItem('currentUser'); localStorage.removeItem('sessionStart'); location.reload(); }});
+    $('editProfileBtn')&&($('editProfileBtn').onclick=()=>{ let p=$('editProfilePanel'); if(p.style.display==='none'){ p.style.display='block'; p.innerHTML=`<input id="editUsername" class="edit-input" value="${escapeHtml(getCurrent().username)}" style="width:100%;padding:12px;margin:8px 0;border-radius:40px;"><input id="editEmail" value="${escapeHtml(getCurrent().email)}" style="width:100%;padding:12px;margin:8px 0;border-radius:40px;"><input id="editMobile" value="${escapeHtml(getCurrent().mobile)}" style="width:100%;padding:12px;margin:8px 0;border-radius:40px;"><button id="saveEditBtn" style="padding:10px 20px;margin:8px;">${currentLanguage==='fa'?'ذخیره':'Save'}</button><button id="cancelEditBtn" style="padding:10px 20px;">${currentLanguage==='fa'?'انصراف':'Cancel'}</button>`; $('saveEditBtn').onclick=()=>{ let nu=$('editUsername').value, ne=$('editEmail').value, nm=$('editMobile').value; let idx=users.findIndex(x=>x.email===getCurrent().email); if(idx!==-1){ users[idx].username=nu; users[idx].email=ne; users[idx].mobile=nm; saveUsers(); saveCurrent(users[idx]); showProfileInfo(); p.style.display='none'; alert(currentLanguage==='fa'?'بروزرسانی شد':'Updated'); }}; $('cancelEditBtn').onclick=()=>p.style.display='none'; }else p.style.display='none'; });
+    $('uploadAvatarBtn')&&($('uploadAvatarBtn').onclick=()=>$('avatarInput').click());
+    $('avatarInput')&&($('avatarInput').onchange=e=>{ let f=e.target.files[0]; if(f&&f.type.startsWith('image/')){ let r=new FileReader(); r.onload=ev=>{ let u=getCurrent(); if(u){ u.avatar=ev.target.result; let idx=users.findIndex(x=>x.email===u.email); if(idx!==-1) users[idx]=u; saveUsers(); saveCurrent(u); showProfileInfo(); } }; r.readAsDataURL(f); } });
+    $('submitComment')&&($('submitComment').onclick=()=>{ let n=$('commentName').value.trim(), t=$('commentText').value.trim(); if(submitComment(n,t)){ $('commentName').value=''; $('commentText').value=''; } });
+    $('submitTicketBtn')&&($('submitTicketBtn').onclick=()=>{ let s=$('ticketSubject').value.trim(), c=$('ticketCategory').value, m=$('ticketMessage').value.trim(); if(submitTicket(s,c,m)){ $('ticketSubject').value=''; $('ticketMessage').value=''; } });
+    $('toggleSwitchAccountBtn')&&($('toggleSwitchAccountBtn').onclick=()=>{ let p=$('switchAccountPanel'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; renderSavedAccounts(); });
+    $('addSwitchAccountBtn')&&($('addSwitchAccountBtn').onclick=()=>{ let e=$('switchAccountEmail').value.trim(), p=$('switchAccountPass').value.trim(); if(addSavedAccount(e,p)){ $('switchAccountEmail').value=''; $('switchAccountPass').value=''; } });
+    function showToast(msg){let d=document.createElement('div');d.className='toast';d.innerText=msg;document.body.appendChild(d);setTimeout(()=>d.remove(),3000);}
+    window.showToast = showToast;
+    $('sendRecoveryCodeBtn')&&($('sendRecoveryCodeBtn').onclick=()=>{ let email=$('recoveryEmail').value,mob=$('recoveryMobile').value; if(users.find(u=>u.email===email&&u.mobile===mob)){ pendingRecoveryCode=genCode(); $('recoveryMsg').innerHTML=`${currentLanguage==='fa'?'کد: ':'Code: '}${pendingRecoveryCode}`; }else $('recoveryMsg').innerHTML=currentLanguage==='fa'?'کاربر یافت نشد':'User not found'; });
+    $('resetPasswordBtn')&&($('resetPasswordBtn').onclick=()=>{ let e=$('recoveryEmail').value,mb=$('recoveryMobile').value,code=$('recoveryCode').value.toUpperCase(),np=$('newPassword').value; if(pendingRecoveryCode===code&&np.length>=4){ let idx=users.findIndex(u=>u.email===e&&u.mobile===mb); if(idx!==-1){ users[idx].password=np; saveUsers(); $('recoveryMsg').innerHTML=currentLanguage==='fa'?'رمز با موفقیت تغییر کرد':'Password changed successfully'; setTimeout(()=>$('recoveryPanel').style.display='none',1500); }}});
+    $('privacyBtn')&&($('privacyBtn').onclick=()=>$('privacyModal').classList.add('active'));
+    $('closePrivacyBtn')&&($('closePrivacyBtn').onclick=()=>$('privacyModal').classList.remove('active'));
+    $('hamburger')&&($('hamburger').onclick=e=>{ $('sideMenu').classList.toggle('open'); $('menuOverlay').classList.toggle('active'); });
+    $('menuOverlay')&&($('menuOverlay').onclick=()=>{ $('sideMenu').classList.remove('open'); $('menuOverlay').classList.remove('active'); });
+    document.querySelectorAll('#sideMenu a[data-page]').forEach(a=>a.onclick=()=>{ let p=a.dataset.page; document.querySelectorAll('.page').forEach(pa=>pa.classList.remove('active-page')); $(`${p}Page`).classList.add('active-page'); if(p==='profile'){showProfileInfo(); if($('switchAccountPanel')) $('switchAccountPanel').style.display='none';} if(p==='about')loadTeam(); if(p==='comments')renderComments(); if(p==='users')updateRanking(); if(p==='online')updateOnlineCount(); if(p==='support')renderTickets(); if(p==='categories')renderGamesByCategory('all'); $('sideMenu').classList.remove('open'); $('menuOverlay').classList.remove('active'); });
+    $('backHome')&&($('backHome').onclick=()=>{ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active-page')); $('homePage').classList.add('active-page'); });
+    $('googleHome')&&($('googleHome').onclick=()=>window.open('https://google.com','_blank'));
+    $('rubikaBtn')&&($('rubikaBtn').onclick=()=>window.open('https://rubika.ir/Gametpersian/BHCIHIEAAFFFGDEH'));
+    document.querySelectorAll('.game-card, .market-btn').forEach(c=>c.onclick=()=>showToast(`🎮 ${c.innerText} ${t('toastSoon')}`));
+    
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.onclick = () => {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            let cat = btn.dataset.cat;
+            renderGamesByCategory(cat);
+        };
+    });
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.onclick = () => {
+            let answer = q.nextElementSibling;
+            if(answer) answer.classList.toggle('show');
+        };
+    });
+    
+    $('langToggleBtn') && ($('langToggleBtn').onclick = toggleLanguage);
+    
+    if(getCurrent()) showMain(); else updCount();
+    setLanguage(currentLanguage);
+    setTimeout(()=>{let s=$('splashScreen');if(s){s.classList.add('hide');setTimeout(()=>s.style.display='none',800);}},1000);
+})();
+</script>
+</body>
+</html>
